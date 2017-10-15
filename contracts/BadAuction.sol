@@ -11,11 +11,12 @@ contract BadAuction is AuctionInterface {
 	 * their funds back
 	 */
 	function bid() payable external returns (bool) {
-		if (msg.value < highestBid) {
+		if (msg.value <= highestBid) {
+			msg.sender.transfer(msg.value);
 			return false;
 		}
 		if (highestBidder != 0) {
-			require(highestBidder.send(highestBid));
+			highestBidder.send(highestBid);
 		}
 		highestBidder = msg.sender;
 		highestBid = msg.value;
