@@ -14,7 +14,8 @@ contract GoodAuction is AuctionInterface {
 	 */
 	function bid() payable external returns(bool) {
 		// YOUR CODE HERE
-		if (msg.value < highestBid) {
+		if (msg.value <= highestBid) {
+			refunds[msg.sender] += msg.value;
 			return false;
 		}
 		if (highestBidder != 0) {
