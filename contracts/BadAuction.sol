@@ -10,8 +10,6 @@ contract BadAuction is AuctionInterface {
 	 * Must return false on failure and send people
 	 * their funds back
 	 */
-	address highestBidder;
-	uint highestBid;
 	function bid() payable external returns (bool) {
 		if (msg.value < highestBid) {
 			return false;
@@ -22,7 +20,6 @@ contract BadAuction is AuctionInterface {
 		highestBidder = msg.sender;
 		highestBid = msg.value;
 		return true;
-
 	}
 
 	/* Give people their funds back */

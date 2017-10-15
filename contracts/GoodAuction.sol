@@ -6,9 +6,6 @@ import "./AuctionInterface.sol";
 contract GoodAuction is AuctionInterface {
 	/* New data structure, keeps track of refunds owed to ex-highest bidders */
 	mapping(address => uint) refunds;
-	address highestBidder;
-	uint highestBid;
-
 	/* Bid function, shifts to push paradigm
 	 * Must return true on successful send and/or bid, bidder
 	 * reassignment
