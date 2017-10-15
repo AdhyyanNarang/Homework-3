@@ -16,7 +16,11 @@ contract BadAuction is AuctionInterface {
 			return false;
 		}
 		if (highestBidder != 0) {
-			highestBidder.send(highestBid);
+			bool transferSuccess = highestBidder.send(highestBid);
+			if (!transferSuccess) {
+				msg.sender.transfer(msg.value);
+				return false;
+			}
 		}
 		highestBidder = msg.sender;
 		highestBid = msg.value;
